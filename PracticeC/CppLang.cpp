@@ -1,9 +1,9 @@
-#include <iostream>
-
-extern "C"
+// #include <iostream>
+#include <stdio.h>
+extern "C" {
+void CallCpp()
 {
-    void CallCpp()
-    {
-        std::cout << "I'm out this place";
-    }
+    printf("++++++ Im cpp +++++++");
+    // std::cout << "I'm out this place";
+}
 }

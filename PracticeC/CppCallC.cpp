@@ -5,6 +5,6 @@ extern "C" {
 }
 
 int main() {
-    std::cout << "----- Cpp call c method -----";
+    std::cout << "----- Cpp call c method -----\n";
     CallC();
 }

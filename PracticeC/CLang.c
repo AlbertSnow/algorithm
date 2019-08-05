@@ -1,6 +1,6 @@
 #include <stdio.h>
 
 int CallC() {
-    printf("hello Clang call c");
+    printf("Im c method\n");
     return 0;
 }

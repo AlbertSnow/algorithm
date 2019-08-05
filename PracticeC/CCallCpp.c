@@ -2,6 +2,6 @@
 #include <stdio.h>
 
 int main() {
-    printf("----- C call cpp method -----");
+    printf("----- C call cpp method -----\n");
     CallCpp();
 }
