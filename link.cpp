@@ -7,7 +7,6 @@ struct ListNode
     ListNode* m_next;
 };                                                   
 
-
 void recursivePrint(ListNode & node);
 
 void init(int length, ListNode &initNode) {
@@ -23,16 +22,18 @@ void init(int length, ListNode &initNode) {
     
     for (int i = 0; i < length; i++)
     {
-        cout << "this node: " << node << "\n";
-        node->m_nValue = i;
+        cout << "\nthis node: " << node << "\n";
 
         ListNode *nextOne;
         if (i == length - 1) {
             nextOne = NULL;
         } else {
-            ListNode newOne;
-            nextOne = &newOne;
-        }        
+            ListNode* newOne = new ListNode;
+            nextOne = newOne;
+            cout << "new one: " << newOne << "\n";
+        }
+
+        node->m_nValue = i;
         node->m_next = nextOne;
         cout << "node value : " << node->m_nValue << "\n";
         cout << "node next : " << node->m_next << "\n";
@@ -43,16 +44,18 @@ void init(int length, ListNode &initNode) {
 void recursivePrint(ListNode& node) {
     ListNode *listNode = &node;
 
-    cout << "\n First print node. " << &node;
+    cout << "\n";
+
     while (listNode != NULL)                                                                                                                                   
     {
-        cout << "\n value: " <<  listNode->m_nValue << " \n";
-        cout << "listNode next: " << listNode->m_next;
+        cout << "Node: " << listNode << "\n";
+        cout << "value: " <<  listNode->m_nValue << " \n";
+        cout << "listNode next: " << listNode->m_next << " \n";
         listNode = listNode->m_next;
+
+        cout << "\n";
     }
 }
-
-
 
 void deleteNode(int value, ListNode *srcListNode) {
     if (srcListNode == NULL || 
@@ -72,9 +75,19 @@ void deleteNode(int value, ListNode *srcListNode) {
     }
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     ListNode firstNode;
-    init(1, firstNode);
+    int listNodeLength;
+
+    if (argc > 1)
+    {
+        cout << "\ninput argument: " << argv[1] << "\n";
+        listNodeLength = argv[1][0] - '0';
+        cout << "listNodeLength: " << listNodeLength << "\n";
+        cout << "\n";
+    }
+    
+    init(listNodeLength, firstNode);
     recursivePrint(firstNode);
     return 0;
 }
