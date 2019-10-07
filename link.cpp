@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include "charUtils.h"
 using namespace std;
 
 struct ListNode 
@@ -47,7 +48,9 @@ void recursivePrint(ListNode& node) {
 
     cout << "\n";
 
-    while (listNode != NULL)                                                                                                                                   
+    int i = 10;
+
+    while (listNode != NULL && i > 0)  
     {
         cout << "Node: " << listNode << "\n";
         cout << "value: " <<  listNode->m_nValue << " \n";
@@ -55,7 +58,34 @@ void recursivePrint(ListNode& node) {
         listNode = listNode->m_next;
 
         cout << "\n";
+        i--;
     }
+}
+
+ListNode* revertLisNode(ListNode* preNode) {
+    cout<< "+++++++++++ Start revertListNode +++++++++" << '\n';
+
+    if (preNode == NULL)
+    {
+        cout << "input listNode is null";
+        return NULL;
+    }
+    
+    ListNode* centerNode = preNode->m_next;
+
+    preNode->m_next = NULL;
+    while (centerNode != NULL)
+    {
+        ListNode* lastNode = centerNode->m_next;
+        centerNode->m_next = preNode;
+
+        preNode = centerNode;
+        centerNode = lastNode;
+
+        cout<< "++++ revert one node +++ preNode " << preNode->m_nValue << '\n';
+    }
+
+    return preNode;
 }
 
 void deleteNode(int value, ListNode& srcListNode) {
@@ -86,29 +116,6 @@ void deleteNode(int value, ListNode& srcListNode) {
 
 }
 
-int  stringToNumber(char chars[]) {
-    int result = 0;
-    if (chars == NULL || chars[0] == '\n' || chars[0] == '-') {
-        cout << "input invalid, Support only number";
-
-        return 0;
-    } 
-
-    int digit = chars[0] - '0';                                                                                                                                                                                                                                                             
-    int i = 1;
-    while (chars[i] != '\0') {
-        digit = (chars[i] - '0') + (digit * 10);
-        cout << "digit " << digit << '\n';
-        i++;
-
-        if(i > 9) {
-            throw invalid_argument("input argument length big than 9");
-        }
-    }
-
-    return digit;
-}
-
 void testDynamicAllocate() {
         ListNode test1;
     cout << "\ntest: " << &test1;
@@ -125,6 +132,8 @@ void testDynamicAllocate() {
     }
 }
 
+
+// clang++ link.cpp  charUtils.cpp -o linkArray  && ./linkArray 19 17
 int main(int argc, char* argv[]) {
     ListNode firstNode;
     int listNodeLength;
@@ -146,10 +155,12 @@ int main(int argc, char* argv[]) {
     
     init(listNodeLength, firstNode);
     recursivePrint(firstNode);
-    deleteNode(deleteValue, firstNode);
-    recursivePrint(firstNode);
+    // deleteNode(deleteValue, firstNode);
+    // recursivePrint(firstNode);
+
+    ListNode revertNode = *revertLisNode(&firstNode);
+    recursivePrint(revertNode);
 
     cout << '\n';
     return 0;
 }
-
