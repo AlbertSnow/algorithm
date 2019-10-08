@@ -1,0 +1,2 @@
+
+int  stringToNumber(char chars[]);
