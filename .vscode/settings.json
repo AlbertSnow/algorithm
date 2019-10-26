@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "testmutlicompile.h": "c",
-        "testcoverload.h": "c",
-        "iostream": "cpp"
-    }
-}
