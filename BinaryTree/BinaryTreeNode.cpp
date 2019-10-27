@@ -22,32 +22,32 @@ void init(BinaryTreeNode *rootNode)
     }
 
     //----- 1layer
-    BinaryTreeNode treeNode1Left;
-    treeNode1Left.m_nValue = 11;
-    rootNode->m_pLeft = &treeNode1Left;
+    BinaryTreeNode* treeNode1Left = new BinaryTreeNode();
+    treeNode1Left->m_nValue = 11;
+    rootNode->m_pLeft = treeNode1Left;
 
-    BinaryTreeNode treeNode1Right;
-    treeNode1Right.m_nValue = 12;
-    rootNode->m_pRight = &treeNode1Right;
+    BinaryTreeNode* treeNode1Right = new BinaryTreeNode();
+    treeNode1Right->m_nValue = 12;
+    rootNode->m_pRight = treeNode1Right;
 
     //----- 2layer
-    BinaryTreeNode treeNode21Left;
-    treeNode21Left.m_nValue = 211;
-    treeNode1Left.m_pLeft = &treeNode21Left;
+    BinaryTreeNode* treeNode21Left = new BinaryTreeNode();
+    treeNode21Left->m_nValue = 211;
+    treeNode1Left->m_pLeft = treeNode21Left;
 
-    BinaryTreeNode treeNode21Right;
-    treeNode21Right.m_nValue = 212;
-    treeNode1Left.m_pRight = &treeNode21Right;
+    BinaryTreeNode* treeNode21Right = new BinaryTreeNode();
+    treeNode21Right->m_nValue = 212;
+    treeNode1Left->m_pRight = treeNode21Right;
 
-    BinaryTreeNode treeNode22Left;
-    treeNode22Left.m_nValue = 221;
-    treeNode1Right.m_pLeft = &treeNode22Left;
+    BinaryTreeNode* treeNode22Left = new BinaryTreeNode();
+    treeNode22Left->m_nValue = 221;
+    treeNode1Right->m_pLeft = treeNode22Left;
 
-    BinaryTreeNode treeNode22Right;
-    treeNode22Right.m_nValue = 222;
-    treeNode1Right.m_pRight = &treeNode22Right;
+    BinaryTreeNode* treeNode22Right = new BinaryTreeNode();
+    treeNode22Right->m_nValue = 222;
+    treeNode1Right->m_pRight = treeNode22Right;
 
-    printTop2Bottom(rootNode);
+    // printTop2Bottom(rootNode);
 }
 
 void printTop2Bottom(BinaryTreeNode *pTreeRoot)
@@ -79,6 +79,11 @@ void printTop2Bottom(BinaryTreeNode *pTreeRoot)
     }
 }
 
+void release(BinaryTreeNode* rootNode) {
+
+    
+}
+
 
 int main()
 {
@@ -88,7 +93,8 @@ int main()
     BinaryTreeNode *pRootNode = &rootNode;
 
     init(pRootNode);
-    // printTop2Bottom(pRootNode);
+    printTop2Bottom(pRootNode);
 
+    // release(pRootNode);
     return 0;
 }
