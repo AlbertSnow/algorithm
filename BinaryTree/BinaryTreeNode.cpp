@@ -1,4 +1,8 @@
 #include <deque>
+#include <stack>
+#include <iostream>
+
+using namespace std;
 
 struct BinaryTreeNode
 {
@@ -78,6 +82,47 @@ void printTop2Bottom(BinaryTreeNode *pTreeRoot)
         }
     }
 }
+void doPrintZOrder (stack<BinaryTreeNode*> printStack, stack<BinaryTreeNode*> saveStack, bool leftChildFirst);
+
+void printZOrder(BinaryTreeNode* rootNode) {
+    cout<< "printZOrder"<< endl;
+
+    stack<BinaryTreeNode*> printSack;
+    stack<BinaryTreeNode*> saveSack;
+    printSack.push(rootNode);
+
+    doPrintZOrder(printSack, saveSack, true);
+}
+
+void doPrintZOrder (stack<BinaryTreeNode*> printStack, stack<BinaryTreeNode*> saveStack, bool leftChildFirst) {
+    cout<< "doPrintZOrder"<< endl;
+
+    BinaryTreeNode* topNode;
+
+    while((topNode = printStack.top()) != nullptr) {
+        printStack.pop();
+        
+        cout << "top : " << topNode->m_nValue;
+
+        BinaryTreeNode* firstNode =  leftChildFirst ? topNode->m_pLeft : topNode->m_pRight;
+        BinaryTreeNode* secondNode =  leftChildFirst ? topNode->m_pRight : topNode->m_pLeft;
+
+        if (firstNode != nullptr)
+        {
+            saveStack.push(firstNode);
+        }
+        
+        if (secondNode != nullptr)
+        {
+            saveStack.push(secondNode);
+        }
+    }
+    
+    cout << "break one layer " << endl;
+
+    doPrintZOrder(saveStack, printStack, !leftChildFirst);
+}
+
 
 void release(BinaryTreeNode* rootNode) {
 
@@ -93,7 +138,8 @@ int main()
     BinaryTreeNode *pRootNode = &rootNode;
 
     init(pRootNode);
-    printTop2Bottom(pRootNode);
+    // printTop2Bottom(pRootNode);
+    printZOrder(pRootNode);
 
     // release(pRootNode);
     return 0;
