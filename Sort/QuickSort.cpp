@@ -3,14 +3,6 @@
 
 using namespace std;
 
-void swapElement(int *array, int start, int end)
-{
-    int cache = array[start];
-    array[start] = array[end];
-    array[end] = cache;
-}
-
-
 void sort(int *array, int start, int end)
 {
     int originalStart = start;
@@ -18,7 +10,7 @@ void sort(int *array, int start, int end)
 
     cout << "originalStart " << originalStart << '\n';
     cout << "originalEnd " << originalEnd << '\n';
-
+                                                                                           
     if (array == NULL || start >= end)
     {
         return;
