@@ -3,9 +3,8 @@
 using namespace std;
 
 // for solve duplicate symbols
-inline void iteratorElement(int * arrays) {
-    int length = sizeof(arrays) / sizeof(arrays[0]);
-    cout << "length: " << sizeof(arrays);
+inline void iteratorElement(int * arrays, int length) {
+    cout << "length: " << length;
     while (length-- > 0) {
         cout << arrays[length] << ',';
     }
