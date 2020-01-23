@@ -3,6 +3,7 @@
 
 void iteratorElement(int * arrays) {
     int length = sizeof(arrays) / sizeof(arrays[0]);
+    cout << "length: " << sizeof(arrays);
     while (length-- > 0) {
         cout << arrays[length] << ',';
     }
