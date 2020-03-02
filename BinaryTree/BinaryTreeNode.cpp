@@ -82,25 +82,25 @@ void printTop2Bottom(BinaryTreeNode *pTreeRoot)
         }
     }
 }
-void doPrintZOrder (stack<BinaryTreeNode*> printStack, stack<BinaryTreeNode*> saveStack, bool leftChildFirst);
+void doPrintZOrder (stack<BinaryTreeNode*>* printStack, stack<BinaryTreeNode*>* saveStack, bool leftChildFirst);
 
 void printZOrder(BinaryTreeNode* rootNode) {
     cout<< "printZOrder"<< endl;
 
-    stack<BinaryTreeNode*> printSack;
-    stack<BinaryTreeNode*> saveSack;
-    printSack.push(rootNode);
+    stack<BinaryTreeNode*>* printSack = new stack<BinaryTreeNode*>;
+    stack<BinaryTreeNode*>* saveSack  = new stack<BinaryTreeNode*>;
+    printSack->push(rootNode);
 
     doPrintZOrder(printSack, saveSack, true);
 }
 
-void doPrintZOrder (stack<BinaryTreeNode*> printStack, stack<BinaryTreeNode*> saveStack, bool leftChildFirst) {
+void doPrintZOrder (stack<BinaryTreeNode*>* printStack, stack<BinaryTreeNode*>* saveStack, bool leftChildFirst) {
     cout<< "doPrintZOrder"<< endl;
 
     BinaryTreeNode* topNode;
 
-    while((topNode = printStack.top()) != nullptr) {
-        printStack.pop();
+    while((topNode = printStack->top()) != nullptr) {
+        printStack->pop();
         
         cout << "top : " << topNode->m_nValue;
 
@@ -109,12 +109,12 @@ void doPrintZOrder (stack<BinaryTreeNode*> printStack, stack<BinaryTreeNode*> sa
 
         if (firstNode != nullptr)
         {
-            saveStack.push(firstNode);
+            saveStack->push(firstNode);
         }
         
         if (secondNode != nullptr)
         {
-            saveStack.push(secondNode);
+            saveStack->push(secondNode);
         }
     }
     

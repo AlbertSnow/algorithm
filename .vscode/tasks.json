@@ -18,18 +18,10 @@
             "problemMatcher": [
                 "$gcc"
             ],
-        },
-        {
-            "label": "Execute me",
-            "type": "shell",
-            "command": "${fileDirname}/${fileBasenameNoExtension}",
-            "dependsOrder": "sequence",
-            "dependsOn": ["clang++ build active file"], 
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
-          }
-          
+        }
     ]
 }
