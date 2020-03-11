@@ -1,11 +1,13 @@
 package BinaryTree;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Stack;
 
-public class DeepFirst {
+public class TraverseBinaryTree {
     TreeNode rootNode;
 
-    DeepFirst() {
+    TraverseBinaryTree() {
         rootNode = initBinaryTree();
     }
 
@@ -41,39 +43,64 @@ public class DeepFirst {
 
     public void dfsByRecurisve(TreeNode treeNode) {
         if (treeNode == null) {
-            System.out.println("return ,node is null");
             return;
         }
 
 
-        System.out.println("Node: " + treeNode.value);
+        System.out.print("--> " + treeNode.value);
         dfsByRecurisve(treeNode.left);
         dfsByRecurisve(treeNode.right);
     }
 
     public void bfsByStack (TreeNode rootNode) {
-        Stack<TreeNode> stackNode = new Stack<>();
+        Stack<TreeNode> stackNodes = new Stack<>();
         
-        stackNode.push(rootNode);
+        stackNodes.push(rootNode);
 
-        while (!stackNode.isEmpty()) {
-            TreeNode node = stackNode.pop();
-            System.out.println("Node: " + node.value);
+        while (!stackNodes.isEmpty()) {
+            TreeNode node = stackNodes.pop();
+            System.out.print("--> " + node.value);
             if (node.right != null) {
-                stackNode.push(node.right);
+                stackNodes.push(node.right);
             }
             if (node.left != null) {
-                stackNode.push(node.left);
+                stackNodes.push(node.left);
             }
         }
     }
 
+    public void wfs(TreeNode rootNode) {
+        Queue<TreeNode> queueNodes = new  ArrayDeque<>();
+
+        queueNodes.add(rootNode);
+
+        while (!queueNodes.isEmpty()) {
+            TreeNode topNode = queueNodes.poll(); 
+            System.out.print("--> " + topNode.value);
+
+            if (topNode.left != null) {
+                queueNodes.add(topNode.left);
+            }
+
+            if (topNode.right != null) {
+                queueNodes.add(topNode.right);
+            }          
+        }
+    }
+
     public static void main (String[] args) {
-        DeepFirst deepFirst = new DeepFirst();
+        TraverseBinaryTree traverseTree = new TraverseBinaryTree();
 
-        deepFirst.dfsByRecurisve(deepFirst.rootNode);
+        traverseTree.dfsByRecurisve(traverseTree.rootNode);
+        System.out.println("\n-----------divider-------------");
 
-        deepFirst.bfsByStack(deepFirst.rootNode);
+        traverseTree.bfsByStack(traverseTree.rootNode);
+        
+        
+        System.out.println("\n-----------divider-------------");
+        traverseTree.wfs(traverseTree.rootNode);
+        System.out.println("");
+
     }
 
 
