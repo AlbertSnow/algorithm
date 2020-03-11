@@ -1,5 +1,7 @@
 package BinaryTree;
 
+import java.util.Stack;
+
 public class DeepFirst {
     TreeNode rootNode;
 
@@ -18,7 +20,7 @@ public class DeepFirst {
             this.value = value;
         }
 
-            }
+    }
 
     private TreeNode initBinaryTree () {
         TreeNode treeNode8 = new TreeNode(null, null, 8);
@@ -37,22 +39,41 @@ public class DeepFirst {
         return treeNode1;
     }
 
-    public void deepFirstSearch(TreeNode treeNode) {
+    public void dfsByRecurisve(TreeNode treeNode) {
         if (treeNode == null) {
             System.out.println("return ,node is null");
             return;
         }
 
 
-        deepFirstSearch(treeNode.left);
         System.out.println("Node: " + treeNode.value);
-        deepFirstSearch(treeNode.right);
+        dfsByRecurisve(treeNode.left);
+        dfsByRecurisve(treeNode.right);
+    }
+
+    public void bfsByStack (TreeNode rootNode) {
+        Stack<TreeNode> stackNode = new Stack<>();
+        
+        stackNode.push(rootNode);
+
+        while (!stackNode.isEmpty()) {
+            TreeNode node = stackNode.pop();
+            System.out.println("Node: " + node.value);
+            if (node.right != null) {
+                stackNode.push(node.right);
+            }
+            if (node.left != null) {
+                stackNode.push(node.left);
+            }
+        }
     }
 
     public static void main (String[] args) {
         DeepFirst deepFirst = new DeepFirst();
 
-        deepFirst.deepFirstSearch(deepFirst.rootNode);
+        deepFirst.dfsByRecurisve(deepFirst.rootNode);
+
+        deepFirst.bfsByStack(deepFirst.rootNode);
     }
 
 
